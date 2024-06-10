@@ -8,11 +8,11 @@ export class ActivityController {
     ) { }
 
     @Get('activities')
-    async fetchActivity() {
-        try{
-            return this.activityService.getActivity()
+    async fetchActivity(@Query('city') city: string) {
+        try {
+            return this.activityService.getActivity(city)
         }
-        catch(err){
+        catch (err) {
             throw err;
         }
     }
