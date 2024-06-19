@@ -3,37 +3,48 @@ import { Injectable } from '@nestjs/common';
 const carDetails = [
     {
         title: 'Compact',
+        pax:5,
 
     }, {
         title: 'Compact Hybrid',
+        pax:5,
 
     }, {
         title: 'Compact SUV',
+        pax:5,
 
     }, {
         title: 'Compact Hybrid SUV',
+        pax:5,
 
     }, {
         title: 'Intermediate SUV 2WD',
+        pax:5,
 
     }, {
         title: 'Intermediate SUV Hybrid',
+        pax:5,
 
 
     }, {
         title: 'Intermediate SUV AWD',
+        pax:5,
 
     }, {
         title: 'EV Sedan',
+        pax:5,
 
     }, {
         title: 'Fullsize Van 8 seat',
+        pax:8,
 
     }, {
         title: 'Premium SUV 4WD',
+        pax:7,
 
     }, {
         title: 'Premium D/C 4WD LID/CPY',
+        pax:5,
 
     }
 ]
