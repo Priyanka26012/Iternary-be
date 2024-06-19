@@ -215,7 +215,7 @@ export class RentalService {
         console.log(highPrice,",highPrice")
         const carPrices = highPrice ? this.getHighPrice(difference) : this.getLowPrice(difference)
        return Object.keys(carPrices).map(elm => {
-            return {...carDetails[elm],price:'$ '+carPrices[elm]}
+            return {...carDetails[elm],price:'$'+carPrices[elm]+' | '+carDetails[elm]?.pax+' passenger'}
         })
     }
 }
