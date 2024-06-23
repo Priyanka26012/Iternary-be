@@ -4,47 +4,56 @@ const carDetails = [
     {
         title: 'Compact',
         pax:5,
-
+        img:'compact-suv.png'
     }, {
         title: 'Compact Hybrid',
         pax:5,
+        img:'compact.png'
 
     }, {
         title: 'Compact SUV',
         pax:5,
-
+        img:'compact-suv.png'
     }, {
         title: 'Compact Hybrid SUV',
         pax:5,
+        img:'compact.png'
 
     }, {
         title: 'Intermediate SUV 2WD',
         pax:5,
+        img:'compact-suv.png'
 
     }, {
         title: 'Intermediate SUV Hybrid',
         pax:5,
 
+        img:'compact-suv.png'
 
     }, {
         title: 'Intermediate SUV AWD',
         pax:5,
+        img:'Intermediate.png'
 
     }, {
         title: 'EV Sedan',
         pax:5,
+        img:'compact-suv.png'
 
     }, {
         title: 'Fullsize Van 8 seat',
         pax:8,
+        img:'fullsize-minvan.png'
 
     }, {
         title: 'Premium SUV 4WD',
         pax:7,
+        img:'premium-suv.png',
 
     }, {
         title: 'Premium D/C 4WD LID/CPY',
         pax:5,
+        img:'premium-4wd.png'
 
     }
 ]
