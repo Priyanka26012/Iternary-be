@@ -20,8 +20,8 @@ export class ItinerariesService {
     return createdItinerary.save();
   }
 
-  async findAll(userId: string): Promise<Itinerary[]> {
-    return this.itineraryModel.find({ createdBy: userId }).exec();
+  async findAll(): Promise<Itinerary[]> {
+    return this.itineraryModel.find().exec();
   }
 
   async findOne(id: string, userId: string): Promise<Itinerary> {
