@@ -10,7 +10,8 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.userModel.findOne({ username }).exec();
+    // Ensure password field is selected
+    return this.userModel.findOne({ username }).select('+password').exec();
   }
 
   async create(username: string, password: string): Promise<User> {
@@ -21,6 +22,8 @@ export class UsersService {
   }
 
   async validatePassword(password: string, hash: string): Promise<boolean> {
+    console.log('Password:', password);
+    console.log('Hash:', hash);
     return bcrypt.compare(password, hash);
   }
 }
