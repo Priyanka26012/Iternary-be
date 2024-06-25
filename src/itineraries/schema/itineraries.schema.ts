@@ -5,7 +5,7 @@ import { UserOwned } from '../../common/interfaces/user-owned.interface';
 import { User } from 'src/users/schema/user.schema';
 
 @Schema()
-class Cover {
+class Cover extends Document{
   @Prop({ type: String, nullable: true })
   logo?: string | null;
 

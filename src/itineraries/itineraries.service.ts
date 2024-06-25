@@ -28,6 +28,14 @@ export class ItinerariesService extends BaseService<Itinerary> {
     return super.findAll(userId);
   }
 
+  async getSuggestions(userId: string): Promise<any[]> {
+    const itineraries = await this.itineraryModel.find({ createdBy: userId }, { cover: 1, _id: 0 }).exec();
+    return itineraries.map(itinerary => ({
+      ...itinerary.cover.toObject(),
+      _id: itinerary.cover._id
+    }));
+  }
+
   async findOne(id: string, userId: string): Promise<Itinerary> {
     return super.findOne(id, userId);
   }

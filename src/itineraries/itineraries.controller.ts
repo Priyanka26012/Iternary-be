@@ -25,6 +25,14 @@ export class ItinerariesController {
    console.log(user,">>>user")
     return this.itinerariesService.findAll(user.userId);
   }
+  
+  @Get('suggestions')
+  async getSuggestions(@User() user) {
+    if (!user || !user.userId) {
+      throw new UnauthorizedException('User not authenticated');
+    }
+    return this.itinerariesService.getSuggestions(user.userId);
+  }
 
   @Get(':id')
   findOne(@User() user, @Param('id') id: string) {
@@ -40,4 +48,6 @@ export class ItinerariesController {
   remove(@User() user, @Param('id') id: string) {
     return this.itinerariesService.remove(id, user.userId);
   }
+
+
 }
