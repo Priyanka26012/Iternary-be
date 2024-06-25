@@ -17,6 +17,7 @@ export class ItinerariesController {
 
   @Get()
   findAll(@Request() req) {
+    console.log(req.user,"<req")
     return this.itinerariesService.findAll(req.user.userId);
   }
 
