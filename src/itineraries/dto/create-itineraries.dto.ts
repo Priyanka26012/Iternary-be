@@ -4,10 +4,10 @@ export class CreateItineraryDto {
   createdBy: string;
   cover: {
     logo: string | null;
-    noOfAdults: number;
-    noOfKids: number;
-    inclusion: string;
-    exclusion: string;
+    noOfAdults: string;
+    noOfKids: string;
+    inclusion: any[],
+    exclusion: any[],
     name: string;
     paxKidName: string;
     paxContact: string;
@@ -56,5 +56,5 @@ export class CreateItineraryDto {
     };
     summary: string;
     activityPerson: number;
-  }[];
+  }[]
 }

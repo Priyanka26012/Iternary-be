@@ -10,16 +10,16 @@ class Cover extends Document{
   logo?: string | null;
 
   @Prop()
-  noOfAdults?: number;
+  noOfAdults?: string;
 
   @Prop()
-  noOfKids?: number;
+  noOfKids?: string;
 
   @Prop()
-  inclusion?: string;
+  inclusion?: string[];
 
   @Prop()
-  exclusion?: string;
+  exclusion?: string[];
 
   @Prop()
   name?: string;
