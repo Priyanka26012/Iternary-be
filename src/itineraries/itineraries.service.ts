@@ -5,13 +5,17 @@ import { Model } from 'mongoose';
 import { Itinerary } from './schema/itineraries.schema'
 import { CreateItineraryDto } from './dto/create-itineraries.dto'
 import { UpdateItineraryDto } from './dto/update-itineraries.dto'
+import { BaseService } from '../common/services/base.service';
 
 @Injectable()
-export class ItinerariesService {
+export class ItinerariesService extends BaseService<Itinerary> {
   constructor(
     @InjectModel(Itinerary.name) private itineraryModel: Model<Itinerary>
-  ) {}
+  ) {
+    super(itineraryModel);
+  }
 
+ 
   async create(createItineraryDto: CreateItineraryDto, userId: string): Promise<Itinerary> {
     const createdItinerary = new this.itineraryModel({
       ...createItineraryDto,
@@ -20,35 +24,27 @@ export class ItinerariesService {
     return createdItinerary.save();
   }
 
-  async findAll(): Promise<Itinerary[]> {
-    return this.itineraryModel.find().exec();
+  async findAll(userId: string): Promise<Itinerary[]> {
+    return super.findAll(userId);
   }
 
   async findOne(id: string, userId: string): Promise<Itinerary> {
-    const itinerary = await this.itineraryModel.findOne({ _id: id, createdBy: userId }).exec();
-    if (!itinerary) {
-      throw new NotFoundException(`Itinerary with ID "${id}" not found or you don't have permission to access it.`);
-    }
-    return itinerary;
+    return super.findOne(id, userId);
   }
 
   async update(id: string, updateItineraryDto: UpdateItineraryDto, userId: string): Promise<Itinerary> {
-    const updatedItinerary = await this.itineraryModel.findOneAndUpdate(
-      { _id: id, createdBy: userId },
-      updateItineraryDto,
-      { new: true }
-    ).exec();
-    if (!updatedItinerary) {
-      throw new NotFoundException(`Itinerary with ID "${id}" not found or you don't have permission to update it.`);
-    }
-    return updatedItinerary;
+    return super.update(id, updateItineraryDto, userId);
   }
 
-  async remove(id: string, userId: string): Promise<any> {
-    const deletedItinerary = await this.itineraryModel.findOneAndDelete({ _id: id, createdBy: userId }).exec();
-    if (!deletedItinerary) {
-      throw new NotFoundException(`Itinerary with ID "${id}" not found or you don't have permission to delete it.`);
-    }
-    return deletedItinerary;
+  async remove(id: string, userId: string): Promise<Itinerary> {
+    return super.remove(id, userId);
+  }
+
+  
+  async findByDateRange(startDate: Date, endDate: Date, userId: string): Promise<Itinerary[]> {
+    return this.itineraryModel.find({
+      createdBy: userId,
+      'days.date': { $gte: startDate, $lte: endDate }
+    }).exec();
   }
 }

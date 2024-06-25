@@ -9,11 +9,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: 'nitin', 
+      secretOrKey: 'nitin', // Make sure this matches the secret used to sign the token
     });
   }
 
   async validate(payload: any) {
-    return { userId: payload.sub, username: payload.username };
+
+    return { userId: payload.userId, username: payload.username };
   }
 }

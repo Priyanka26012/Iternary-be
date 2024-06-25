@@ -1,6 +1,8 @@
 // itineraries/schemas/itinerary.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
+import { UserOwned } from '../../common/interfaces/user-owned.interface';
+import { User } from 'src/users/schema/user.schema';
 
 @Schema()
 class Cover {
@@ -159,14 +161,18 @@ class Day {
 
 @Schema()
 export class Itinerary extends Document {
-  @Prop({ type: MongooseSchema.Types.String, ref: 'users' })
-  createdBy?: string;
+
 
   @Prop({ type: Cover })
   cover?: Cover;
 
   @Prop({ type: [Day] })
   days?: Day[];
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name, required: true })
+  createdBy: string;
+
+  
 }
 
 export const ItinerarySchema = SchemaFactory.createForClass(Itinerary);
