@@ -3,57 +3,57 @@ import { Injectable } from '@nestjs/common';
 const carDetails = [
     {
         title: 'Compact',
-        pax:5,
-        img:'compact-suv.png'
+        pax: 5,
+        img: 'compact-suv.png'
     }, {
         title: 'Compact Hybrid',
-        pax:5,
-        img:'compact.png'
+        pax: 5,
+        img: 'compact.png'
 
     }, {
         title: 'Compact SUV',
-        pax:5,
-        img:'compact-suv.png'
+        pax: 5,
+        img: 'compact-suv.png'
     }, {
         title: 'Compact Hybrid SUV',
-        pax:5,
-        img:'compact.png'
+        pax: 5,
+        img: 'compact.png'
 
     }, {
         title: 'Intermediate SUV 2WD',
-        pax:5,
-        img:'compact-suv.png'
+        pax: 5,
+        img: 'compact-suv.png'
 
     }, {
         title: 'Intermediate SUV Hybrid',
-        pax:5,
+        pax: 5,
 
-        img:'compact-suv.png'
+        img: 'compact-suv.png'
 
     }, {
         title: 'Intermediate SUV AWD',
-        pax:5,
-        img:'Intermediate.png'
+        pax: 5,
+        img: 'Intermediate.png'
 
     }, {
         title: 'EV Sedan',
-        pax:5,
-        img:'compact-suv.png'
+        pax: 5,
+        img: 'compact-suv.png'
 
     }, {
         title: 'Fullsize Van 8 seat',
-        pax:8,
-        img:'fullsize-minvan.png'
+        pax: 8,
+        img: 'fullsize-minvan.png'
 
     }, {
         title: 'Premium SUV 4WD',
-        pax:7,
-        img:'premium-suv.png',
+        pax: 7,
+        img: 'premium-suv.png',
 
     }, {
         title: 'Premium D/C 4WD LID/CPY',
-        pax:5,
-        img:'premium-4wd.png'
+        pax: 5,
+        img: 'premium-4wd.png'
 
     }
 ]
@@ -219,12 +219,12 @@ export class RentalService {
         const date2: any = new Date(end);
         const differenceMs = date2 - date1;
         const difference = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
-        console.log(difference,",difference")
-        const highPrice =this.isWithinRange(start)
-        console.log(highPrice,",highPrice")
+        console.log(difference, ",difference")
+        const highPrice = this.isWithinRange(start)
+        console.log(highPrice, ",highPrice")
         const carPrices = highPrice ? this.getHighPrice(difference) : this.getLowPrice(difference)
-       return Object.keys(carPrices).map(elm => {
-            return {...carDetails[elm],price:'$'+carPrices[elm]+' | '+carDetails[elm]?.pax+' passenger'}
+        return Object.keys(carPrices).map(elm => {
+            return { ...carDetails[elm], totalPrice: carPrices[elm], price: '$' + carPrices[elm] + ' | ' + carDetails[elm]?.pax + ' passenger' }
         })
     }
 }
