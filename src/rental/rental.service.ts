@@ -219,7 +219,6 @@ export class RentalService {
         const date2: any = new Date(end);
         const differenceMs = date2 - date1;
         const difference = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
-        console.log(difference, ",difference")
         const highPrice = this.isWithinRange(start)
         console.log(highPrice, ",highPrice")
         const carPrices = highPrice ? this.getHighPrice(difference) : this.getLowPrice(difference)

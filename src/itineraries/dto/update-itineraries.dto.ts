@@ -1,12 +1,12 @@
 // itineraries/dto/update-itinerary.dto.ts
 export class UpdateItineraryDto {
-   createdBy: string;
+  createdBy: string;
   cover: {
-    logo: string | null;
-    noOfAdults: number;
-    noOfKids: number;
-    inclusion: string;
-    exclusion: string;
+    logo:any;
+        noOfAdults: string;
+    noOfKids: string;
+    inclusion: any[];
+    exclusion: any[];
     name: string;
     paxKidName: string;
     paxContact: string;
@@ -48,10 +48,17 @@ export class UpdateItineraryDto {
       flightTime: string;
       ferryTime: number;
       baggageIncluded: boolean;
+      baggageText: string;
+      baggageFee: number;
       ferryAvailable: boolean;
-      ferryAvailableTextFrom: string;
+      ferryAvailableTextFrom: any[];
       ferryAvailableTextTo: string;
       ferryFee: number;
+    };
+    packedLunch: {
+      title: string;
+      enabled: boolean;
+      price: number;
     };
     summary: string;
     activityPerson: number;

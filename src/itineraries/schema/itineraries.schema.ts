@@ -1,7 +1,6 @@
 // itineraries/schemas/itinerary.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { UserOwned } from '../../common/interfaces/user-owned.interface';
 import { User } from 'src/users/schema/user.schema';
 
 @Schema()
@@ -72,6 +71,9 @@ class Cover extends Document{
 
 @Schema()
 class Hotel {
+  @Prop({ type: MongooseSchema.Types.Mixed })
+  hotel?: any;
+
   @Prop()
   totalPrice?: number;
 
@@ -123,16 +125,34 @@ class Transport {
   baggageIncluded?: boolean;
 
   @Prop()
-  ferryAvailable?: boolean;
+  baggageText?: string;
 
   @Prop()
-  ferryAvailableTextFrom?: string;
+  baggageFee?: number;
+
+  @Prop()
+  ferryAvailable?: boolean;
+
+  @Prop({ type: MongooseSchema.Types.Mixed })
+  ferryAvailableTextFrom?: any[];
 
   @Prop()
   ferryAvailableTextTo?: string;
 
   @Prop()
   ferryFee?: number;
+}
+
+@Schema()
+class PackedLunch {
+  @Prop()
+  title?: string;
+
+  @Prop()
+  enabled?: boolean;
+
+  @Prop()
+  price?: number;
 }
 
 @Schema()
@@ -151,6 +171,9 @@ class Day {
 
   @Prop({ type: Transport })
   transport?: Transport;
+
+  @Prop({ type: PackedLunch })
+  packedLunch?: PackedLunch;
 
   @Prop()
   summary?: string;

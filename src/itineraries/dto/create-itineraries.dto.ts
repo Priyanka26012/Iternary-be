@@ -3,11 +3,11 @@
 export class CreateItineraryDto {
   createdBy: string;
   cover: {
-    logo: string | null;
+    logo: any;
     noOfAdults: string;
     noOfKids: string;
-    inclusion: any[],
-    exclusion: any[],
+    inclusion: any[];
+    exclusion: any[];
     name: string;
     paxKidName: string;
     paxContact: string;
@@ -49,12 +49,19 @@ export class CreateItineraryDto {
       flightTime: string;
       ferryTime: number;
       baggageIncluded: boolean;
+      baggageText: string;
+      baggageFee: number;
       ferryAvailable: boolean;
-      ferryAvailableTextFrom: string;
+      ferryAvailableTextFrom: any[];
       ferryAvailableTextTo: string;
       ferryFee: number;
     };
+    packedLunch: {
+      title: string;
+      enabled: boolean;
+      price: number;
+    };
     summary: string;
     activityPerson: number;
-  }[]
+  }[];
 }
