@@ -28,16 +28,7 @@ export class CreateItineraryDto {
   days: {
     city: any;
     activity: any[];
-    hotel: {
-      totalPrice: number;
-      typeOfRoom: any;
-      noOfRooms: number;
-      bedConfiguration: string;
-      occupancy: {
-        adults: number;
-        children: number;
-      };
-    };
+    hotel:any;
     drivingHrs: number | null;
     transport: {
       vehicleType: string;

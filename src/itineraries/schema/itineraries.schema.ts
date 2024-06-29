@@ -163,8 +163,8 @@ class Day {
   @Prop({ type: [MongooseSchema.Types.Mixed] })
   activity?: any[];
 
-  @Prop({ type: Hotel })
-  hotel?: Hotel;
+  @Prop({ type:  MongooseSchema.Types.Mixed })
+  hotel?:any
 
   @Prop({ type: Number, nullable: true })
   drivingHrs?: number | null;
