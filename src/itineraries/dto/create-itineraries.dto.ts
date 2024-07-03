@@ -47,6 +47,7 @@ export class CreateItineraryDto {
       ferryAvailableTextTo: string;
       ferryFee: number;
     };
+    typeOfRoom:any;
     packedLunch: {
       title: string;
       enabled: boolean;

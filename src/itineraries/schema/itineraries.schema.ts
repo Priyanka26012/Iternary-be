@@ -4,7 +4,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { User } from 'src/users/schema/user.schema';
 
 @Schema()
-class Cover extends Document{
+class Cover extends Document {
   @Prop({ type: String, nullable: true })
   logo?: string | null;
 
@@ -163,9 +163,11 @@ class Day {
   @Prop({ type: [MongooseSchema.Types.Mixed] })
   activity?: any[];
 
-  @Prop({ type:  MongooseSchema.Types.Mixed })
-  hotel?:any
+  @Prop({ type: MongooseSchema.Types.Mixed })
+  hotel?: any
 
+  @Prop({ type: MongooseSchema.Types.Mixed })
+  typeOfRoom?: any
   @Prop({ type: Number, nullable: true })
   drivingHrs?: number | null;
 
@@ -195,7 +197,7 @@ export class Itinerary extends Document {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name, required: true })
   createdBy: string;
 
-  
+
 }
 
 export const ItinerarySchema = SchemaFactory.createForClass(Itinerary);

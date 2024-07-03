@@ -25,6 +25,7 @@ export class UpdateItineraryDto {
     carRental: any[];
   };
   days: {
+    typeOfRoom?:any;
     city: any;
     activity: any[];
     hotel: any;
