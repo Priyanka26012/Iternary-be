@@ -59,171 +59,62 @@ const carDetails = [
 ]
 @Injectable()
 export class RentalService {
-    isWithinRange(dateString) {
-        var date = new Date(dateString);
-        var month = date.getMonth(); // January is 0, February is 1, ..., December is 11
-        return month >= 8 || month <= 2;
+    private highSeasonMonths: number[] = [8, 9, 10, 11, 0, 1, 2]; // Sep to Mar
+
+    private parseDate(dateString: string): Date {
+        const [day, month, year] = dateString.split('/');
+        return new Date(Number(year), Number(month) - 1, Number(day));
     }
-    getHighPrice(difference: number) {
-        const conditional = (upper, lower) => {
-            return (difference >= upper || difference <= lower)
+
+    private isWithinHighSeason(date: Date): boolean {
+        return this.highSeasonMonths.includes(date.getMonth());
+    }
+
+    private getDaysDifference(start: Date, end: Date): number {
+        const differenceMs = end.getTime() - start.getTime();
+        return Math.floor(differenceMs / (1000 * 60 * 60 * 24));
+    }
+
+    private getPrices(difference: number, isHighSeason: boolean): Record<number, number> {
+        const getPriceSet = (prices: number[]) => {
+            return Object.fromEntries(prices.map((price, index) => [index, price]));
+        };
+
+        if (difference >= 1 && difference <= 3) {
+            return getPriceSet([148, 153, 159, 164, 162, 166, 181, 200, 196, 221, 229]);
+        } else if (difference >= 4 && difference <= 6) {
+            return getPriceSet([141, 145, 151, 156, 154, 158, 172, 191, 186, 210, 218]);
+        } else if (difference >= 7 && difference <= 13) {
+            return getPriceSet([137, 141, 146, 151, 148, 153, 166, 185, 181, 203, 211]);
+        } else if (difference >= 14 && difference <= 27) {
+            return getPriceSet([137, 141, 146, 151, 148, 153, 166, 185, 181, 203, 211]);
+        } else if (difference >= 28) {
+            return getPriceSet([119, 123, 127, 131, 129, 133, 144, 161, 157, 177, 183]);
         }
-        if (conditional(1, 3))
-            return {
-                0: 148,
-                1: 153,
-                2: 159,
-                3: 164,
-                4: 162,
-                5: 166,
-                6: 181,
-                7: 200,
-                8: 196,
-                9: 221,
-                10: 229
-            }
-        if (conditional(4, 6))
-            return {
-                0: 141,
-                1: 145,
-                2: 151,
-                3: 156,
-                4: 154,
-                5: 158,
-                6: 172,
-                7: 191,
-                8: 186,
-                9: 210,
-                10: 218
-            }
-        if (conditional(7, 13))
-            return {
-                0: 137,
-                1: 141,
-                2: 146,
-                3: 151,
-                4: 148,
-                5: 153,
-                6: 166,
-                7: 185,
-                8: 181,
-                9: 203,
-                10: 211
-            }
-        if (conditional(14, 27))
-            return {
-                0: 137,
-                1: 141,
-                2: 146,
-                3: 151,
-                4: 148,
-                5: 153,
-                6: 166,
-                7: 185,
-                8: 181,
-                9: 203,
-                10: 211
-            }
-        if (conditional(28, 100000))
-            return {
-                0: 119,
-                1: 123,
-                2: 127,
-                3: 131,
-                4: 129,
-                5: 133,
-                6: 144,
-                7: 161,
-                8: 157,
-                9: 177,
-                10: 183
-            }
+
+        // Default case, you might want to handle this differently
+        return getPriceSet([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     }
-    getLowPrice(difference: number) {
-        const conditional = (upper, lower) => {
-            return (difference >= upper || difference <= lower)
-        }
-        if (conditional(1, 3))
-            return {
-                0: 148,
-                1: 153,
-                2: 159,
-                3: 164,
-                4: 162,
-                5: 166,
-                6: 181,
-                7: 200,
-                8: 196,
-                9: 221,
-                10: 229
-            }
-        if (conditional(4, 6))
-            return {
-                0: 141,
-                1: 145,
-                2: 151,
-                3: 156,
-                4: 154,
-                5: 158,
-                6: 172,
-                7: 191,
-                8: 186,
-                9: 210,
-                10: 218
-            }
-        if (conditional(7, 13))
-            return {
-                0: 137,
-                1: 141,
-                2: 146,
-                3: 151,
-                4: 148,
-                5: 153,
-                6: 166,
-                7: 185,
-                8: 181,
-                9: 203,
-                10: 211
-            }
-        if (conditional(14, 27))
-            return {
-                0: 137,
-                1: 141,
-                2: 146,
-                3: 151,
-                4: 148,
-                5: 153,
-                6: 166,
-                7: 185,
-                8: 181,
-                9: 203,
-                10: 211
-            }
-        if (conditional(28, 100000))
-            return {
-                0: 119,
-                1: 123,
-                2: 127,
-                3: 131,
-                4: 129,
-                5: 133,
-                6: 144,
-                7: 161,
-                8: 157,
-                9: 177,
-                10: 183
-            }
-    }
+
     fetchCar(start: string, end: string) {
-        const date1: any = new Date(start);
-        const date2: any = new Date(end);
-        const differenceMs = date2 - date1;
-        const difference = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
-        const highPrice = this.isWithinRange(start)
-        console.log(highPrice, ",highPrice")
-        const carPrices = highPrice ? this.getHighPrice(difference) : this.getLowPrice(difference)
+        const startDate = this.parseDate(start);
+        const endDate = this.parseDate(end);
+
+        const difference = this.getDaysDifference(startDate, endDate);
+
+        // Check if both start and end dates are within high season
+        const isHighSeason = this.isWithinHighSeason(startDate) && this.isWithinHighSeason(endDate);
+
+        const carPrices = this.getPrices(difference, isHighSeason);
+
         return Object.keys(carPrices).map(elm => {
-            return { ...carDetails[elm], totalPrice: carPrices[elm], price: '$' + carPrices[elm] + ' | ' + carDetails[elm]?.pax + ' passenger' }
-        })
+            const index = Number(elm);
+            return {
+                ...carDetails[index],
+                totalPrice: carPrices[index],
+                price: `$${carPrices[index]} | ${carDetails[index]?.pax} passenger`,
+                isHighSeason: isHighSeason
+            };
+        });
     }
 }
