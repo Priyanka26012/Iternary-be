@@ -1,6 +1,6 @@
 // itineraries/schemas/itinerary.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
+import { AnyObject, Document, Schema as MongooseSchema } from 'mongoose';
 import { User } from 'src/users/schema/user.schema';
 
 @Schema()
@@ -85,6 +85,9 @@ class Hotel {
 
   @Prop()
   bedConfiguration?: string;
+
+  @Prop({ type: [MongooseSchema.Types.String] })
+  rangeOfStay?: [String,String];
 
   @Prop({
     type: {
