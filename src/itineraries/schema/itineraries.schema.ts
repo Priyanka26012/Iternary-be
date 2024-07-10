@@ -47,8 +47,8 @@ class Cover extends Document {
   @Prop()
   number?: string;
 
-  @Prop({ type: [Date] })
-  range?: [Date | null, Date | null];
+  @Prop({ type: [MongooseSchema.Types.String] })
+  range?: [String,String];
 
   @Prop()
   title?: string;

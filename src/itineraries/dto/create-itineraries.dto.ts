@@ -17,7 +17,7 @@ export class CreateItineraryDto {
     personName: string;
     paxName: string;
     number: string;
-    range: [Date | null, Date | null];
+    range: [ string, string];
     title: string;
     startDate: string;
     endDate: string;
