@@ -31,6 +31,7 @@ export class UpdateItineraryDto {
     activity: any[];
     hotel: any;
     drivingHrs: number | null;
+    rangeOfStay:string[],
     transport: {
       vehicleType: string;
       fuelType: string;
