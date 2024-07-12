@@ -27,6 +27,7 @@ export class CreateItineraryDto {
   };
   days: {
     city: any;
+    totalPrice:any;
     activity: any[];
     hotel:any;
     drivingHrs: number | null;

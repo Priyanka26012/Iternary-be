@@ -162,7 +162,7 @@ class PackedLunch {
 class Day {
   @Prop({ type: MongooseSchema.Types.Mixed })
   city?: any;
-  
+
   @Prop({ type: MongooseSchema.Types.Number })
   totalPrice?:number;
 

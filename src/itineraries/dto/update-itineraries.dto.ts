@@ -27,6 +27,7 @@ export class UpdateItineraryDto {
   days: {
     typeOfRoom?:any;
     city: any;
+    totalPrice:any;
     activity: any[];
     hotel: any;
     drivingHrs: number | null;
