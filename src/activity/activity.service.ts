@@ -34,14 +34,15 @@ export class ActivityService {
       headers: myHeaders,
       redirect: 'follow'
     };
-    return fetch(`https://www.ticketmates.net/en/api/v3/${city}/activities`, requestOptions)
-      .then(response => response.json())
+    // return fetch(`https://www.ticketmates.net/en/api/v3/${city}/activities`, requestOptions)
+    return fetch(`https://www.ticketmates.net/en/api/v3/${city}`, requestOptions)
+    .then(response => response.json())
       .then(result => result)
       .catch(error => {
         throw error;
       });
   }
-  async getActivityDetails(city: string, productURL: string) {
+  async getActivityDetails(city: string, productURL: string,pageNo:any) {
     const loginCreds: { token: string } = await this.loginActivity("taratravel-EXOZ-api", "!4@R8kTAy3")
     const token = loginCreds.token;
     if (!token?.length) {
@@ -57,7 +58,7 @@ export class ActivityService {
       redirect: 'follow'
     };
 
-    return fetch(`https://www.ticketmates.net/en/api/v3/${city}/${productURL}`, requestOptions)
+    return fetch(`https://www.ticketmates.net/en/api/v3/${city}/${productURL}?max=100&offset=${pageNo}`, requestOptions)
       .then(response => response.json())
       .then(result => (result))
       .catch(error => []);

@@ -19,11 +19,12 @@ export class ActivityController {
     @Get('activities/details')
     async fetchActivityDetails(@Query() query: {
         productURL: string,
-        city: string
+        city: string,
+        pageNo:number
     }) {
-        const { productURL = '', city = '' } = query;
+        const { productURL = '', city = '',pageNo=1 } = query;
         try {
-            return this.activityService.getActivityDetails(city, productURL)
+            return this.activityService.getActivityDetails(city, productURL,pageNo)
         }
         catch (err) {
             throw err;
