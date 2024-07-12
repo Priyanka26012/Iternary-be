@@ -74,7 +74,7 @@ class Hotel {
   @Prop({ type: MongooseSchema.Types.Mixed })
   hotel?: any;
 
-  @Prop()
+  @Prop({ type: MongooseSchema.Types.Mixed })
   totalPrice?: any;
 
   @Prop({ type: MongooseSchema.Types.Mixed })
