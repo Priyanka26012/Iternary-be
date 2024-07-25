@@ -48,7 +48,7 @@ class Cover extends Document {
   number?: string;
 
   @Prop({ type: [MongooseSchema.Types.String] })
-  range?: [String,String];
+  range?: [String, String];
 
   @Prop()
   title?: string;
@@ -86,8 +86,7 @@ class Hotel {
   @Prop()
   bedConfiguration?: string;
 
-  @Prop({ type: [MongooseSchema.Types.String] })
-  rangeOfStay?: [String,String];
+  
 
   @Prop({
     type: {
@@ -164,13 +163,16 @@ class Day {
   city?: any;
 
   @Prop({ type: MongooseSchema.Types.Number })
-  totalPrice?:number;
+  totalPrice?: number;
 
   @Prop({ type: [MongooseSchema.Types.Mixed] })
   activity?: any[];
 
   @Prop({ type: MongooseSchema.Types.Mixed })
   hotel?: any
+
+  @Prop({ type: [MongooseSchema.Types.String] })
+  rangeOfStay?: [String, String];
 
   @Prop({ type: MongooseSchema.Types.Mixed })
   typeOfRoom?: any
