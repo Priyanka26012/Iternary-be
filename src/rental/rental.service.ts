@@ -79,16 +79,90 @@ export class RentalService {
         const getPriceSet = (prices: number[]) => {
             return Object.fromEntries(prices.map((price, index) => [index, price]));
         };
-
         if (difference >= 1 && difference <= 3) {
+            if (!isHighSeason) {
+                return getPriceSet([
+                    124,
+                    127,
+                    132,
+                    137,
+                    135,
+                    139,
+                    150,
+                    167,
+                    163,
+                    176,
+                    208
+                ])
+            }
             return getPriceSet([148, 153, 159, 164, 162, 166, 181, 200, 196, 221, 229]);
         } else if (difference >= 4 && difference <= 6) {
+            if (!isHighSeason) {
+                return getPriceSet([
+                    118,
+                    121,
+                    125,
+                    130,
+                    128,
+                    132,
+                    143,
+                    159,
+                    155,
+                    167,
+                    198
+                ])
+            }
             return getPriceSet([141, 145, 151, 156, 154, 158, 172, 191, 186, 210, 218]);
         } else if (difference >= 7 && difference <= 13) {
+            if (!isHighSeason) {
+                return getPriceSet([
+                    114,
+                    117,
+                    122,
+                    125,
+                    124,
+                    127,
+                    138,
+                    154,
+                    150,
+                    162,
+                    191
+                ])
+            }
             return getPriceSet([137, 141, 146, 151, 148, 153, 166, 185, 181, 203, 211]);
         } else if (difference >= 14 && difference <= 27) {
+            if (!isHighSeason) {
+                return getPriceSet([
+                    108,
+                    112,
+                    116,
+                    212,
+                    119,
+                    122,
+                    132,
+                    147,
+                    143, 155,
+                    183
+
+                ])
+            }
             return getPriceSet([137, 141, 146, 151, 148, 153, 166, 185, 181, 203, 211]);
         } else if (difference >= 28) {
+            if (!isHighSeason) {
+                return getPriceSet([
+                    99,
+                    102,
+                    105,
+                    109,
+                    108,
+                    111,
+                    120,
+                    134,
+                    131,
+                    141,
+                    166
+                ])
+            }
             return getPriceSet([119, 123, 127, 131, 129, 133, 144, 161, 157, 177, 183]);
         }
 
