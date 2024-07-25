@@ -103,7 +103,8 @@ export class RentalService {
         const difference = this.getDaysDifference(startDate, endDate);
 
         // Check if both start and end dates are within high season
-        const isHighSeason = this.isWithinHighSeason(startDate) && this.isWithinHighSeason(endDate);
+        const isHighSeason = this.isWithinHighSeason(startDate)
+        //  && this.isWithinHighSeason(endDate);
 
         const carPrices = this.getPrices(difference, isHighSeason);
 
