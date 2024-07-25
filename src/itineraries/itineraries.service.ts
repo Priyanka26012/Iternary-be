@@ -15,7 +15,7 @@ export class ItinerariesService extends BaseService<Itinerary> {
     super(itineraryModel);
   }
 
- 
+
   async create(createItineraryDto: CreateItineraryDto, userId: string): Promise<Itinerary> {
     const createdItinerary = new this.itineraryModel({
       ...createItineraryDto,
@@ -30,10 +30,16 @@ export class ItinerariesService extends BaseService<Itinerary> {
 
   async getSuggestions(userId: string): Promise<any[]> {
     const itineraries = await this.itineraryModel.find({ createdBy: userId }, { cover: 1, _id: 0 }).exec();
-    return itineraries.map(itinerary => ({
-      ...itinerary.cover.toObject(),
-      _id: itinerary.cover._id
-    }));
+    const uniqueMap = new Map();
+    itineraries.forEach(itinerary => {
+      if (itinerary.cover && itinerary.cover.number) {
+        uniqueMap.set(itinerary.cover.number.toString(), {
+          ...itinerary.cover.toObject(),
+          _id: itinerary.cover.number
+        });
+      }
+    });
+    return Array.from(uniqueMap.values());
   }
 
   async findOne(id: string, userId: string): Promise<Itinerary> {
@@ -48,7 +54,7 @@ export class ItinerariesService extends BaseService<Itinerary> {
     return super.remove(id, userId);
   }
 
-  
+
   async findByDateRange(startDate: Date, endDate: Date, userId: string): Promise<Itinerary[]> {
     return this.itineraryModel.find({
       createdBy: userId,
