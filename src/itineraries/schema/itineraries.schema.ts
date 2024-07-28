@@ -5,8 +5,8 @@ import { User } from 'src/users/schema/user.schema';
 
 @Schema()
 class Cover extends Document {
-  @Prop({ type: String, nullable: true })
-  logo?: string | null;
+  @Prop({ type: [MongooseSchema.Types.Mixed], nullable: true })
+  logo?: any | null;
   @Prop({ type: Number })
   pricePerAdults: number;
   @Prop({ type: Number })
