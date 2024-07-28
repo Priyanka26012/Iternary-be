@@ -7,7 +7,10 @@ import { User } from 'src/users/schema/user.schema';
 class Cover extends Document {
   @Prop({ type: String, nullable: true })
   logo?: string | null;
-
+  @Prop({ type: Number })
+  pricePerAdults: number;
+  @Prop({ type: Number })
+  pricePerKid: number;
   @Prop()
   noOfAdults?: string;
 
@@ -86,7 +89,7 @@ class Hotel {
   @Prop()
   bedConfiguration?: string;
 
-  
+
 
   @Prop({
     type: {
