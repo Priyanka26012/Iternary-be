@@ -1,5 +1,5 @@
 // itineraries/itineraries.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Itinerary } from './schema/itineraries.schema'
@@ -23,7 +23,22 @@ export class ItinerariesService extends BaseService<Itinerary> {
     });
     return createdItinerary.save();
   }
+  async uploadLogo(itineraryId: string, logoBase64: string, userId: string) {
+    const itinerary = await this.itineraryModel.findById(itineraryId);
+    if (!itinerary) {
+      throw new NotFoundException('Itinerary not found');
+    }
 
+    if (itinerary.createdBy.toString() !== userId) {
+      throw new UnauthorizedException('User not authorized to modify this itinerary');
+    }
+
+    // Update the itinerary with the new logo
+    itinerary.cover.logo = logoBase64;
+    await itinerary.save();
+
+    return { message: 'Logo uploaded successfully' };
+  }
   async findAll(userId: string): Promise<Itinerary[]> {
     return super.findAll(userId);
   }

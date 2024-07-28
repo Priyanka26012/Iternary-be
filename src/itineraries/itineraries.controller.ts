@@ -10,7 +10,7 @@ import { User } from '../common/decorators/user.decorator';
 @UseGuards(JwtAuthGuard)
 export class ItinerariesController {
   constructor(private readonly itinerariesService: ItinerariesService) { }
-  
+
   @Post()
   create(@User() user, @Body() createItineraryDto: CreateItineraryDto) {
     console.log('User object:', user); // Add this line for debugging
@@ -19,13 +19,22 @@ export class ItinerariesController {
     }
     return this.itinerariesService.create(createItineraryDto, user.userId);
   }
-
+  @Post('upload-logo')
+  async uploadLogo(@User() user, @Body() uploadLogoDto: {
+    itineraryId: string;
+    logo: string;
+  }) {
+    if (!user || !user.userId) {
+      throw new UnauthorizedException('User not authenticated');
+    }
+    return this.itinerariesService.uploadLogo(uploadLogoDto.itineraryId, uploadLogoDto.logo, user.userId);
+  }
   @Get()
   findAll(@User() user) {
-   console.log(user,">>>user")
+    console.log(user, ">>>user")
     return this.itinerariesService.findAll(user.userId);
   }
-  
+
   @Get('suggestions')
   async getSuggestions(@User() user) {
     if (!user || !user.userId) {
