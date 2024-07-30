@@ -154,7 +154,7 @@ class PackedLunch {
   title?: string;
 
   @Prop()
-  enabled?: boolean;
+  enable?: boolean;
 
   @Prop()
   price?: number;
