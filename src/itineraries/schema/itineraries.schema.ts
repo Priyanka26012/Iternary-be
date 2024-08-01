@@ -166,7 +166,8 @@ class Day {
   city?: any;
   @Prop({ type: MongooseSchema.Types.Mixed })
   hotelCity?: any;
-
+  @Prop()
+  noOfRooms?: number|string;
   @Prop({ type: MongooseSchema.Types.Number })
   totalPrice?: number;
 
