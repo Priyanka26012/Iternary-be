@@ -5,6 +5,8 @@ import { User } from 'src/users/schema/user.schema';
 
 @Schema()
 class Cover extends Document {
+  @Prop({ type: MongooseSchema.Types.Number })
+  margin?: number;
   @Prop({ type: MongooseSchema.Types.Mixed, nullable: true })
   logo?: any | null;
   @Prop({ type: Number })
@@ -169,7 +171,7 @@ class Day {
 
   @Prop({ type: MongooseSchema.Types.Mixed })
   noOfRooms?: number | string;
-  
+
   @Prop({ type: MongooseSchema.Types.Number })
   totalPrice?: number;
 
