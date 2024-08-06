@@ -5,6 +5,8 @@ import { User } from 'src/users/schema/user.schema';
 
 @Schema()
 class Cover extends Document {
+  @Prop({ type: MongooseSchema.Types.Mixed })
+  editable?:boolean;
   @Prop({ type: MongooseSchema.Types.Number })
   margin?: number;
   @Prop({ type: MongooseSchema.Types.Mixed, nullable: true })
